@@ -1,8 +1,9 @@
 module Euler9 where
 
 main = do
-        let res = findtriple $ reverse $ squares (1000^2)
+        let res@(a,b,c) = findtriple $ reverse $ squares (1000^2)
         putStrLn $ show res
+        putStrLn $ show $ a*b*c
 
 --Filter perfect squares
 nums n = [1..n]
@@ -13,7 +14,7 @@ squares n = filter (\x -> (floor . sqrt $ fromIntegral x) ^ 2 == x) $ nums n
 findtriple :: [Int] -> (Int,Int,Int)
 findtriple [] = error "Can't find a match."
 findtriple (c:cs) = case (findb cs) of
-                          Nothing -> trace "tick" $ findtriple cs
+                          Nothing -> findtriple cs
                           Just x -> x
   where
     findb [] = Nothing
